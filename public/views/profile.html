@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/style.css"> -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>profile</title>
+</head>
+<body>  
+    <div class="container">
+        <div class="bar">
+            <div class="logo-bar">
+                <img src="../img/logo.svg">
+            </div>
+            <div class="menu-bar">
+                <div class="menu-images">
+                    <img src="../img/profile.svg", id="menu-image">
+                    <img src="../img/messages.svg", id="menu-image">
+                    <img src="../img/groups.svg", id="menu-image">
+                    <img src="../img/friends.svg", id="menu-image">
+                    <img src="../img/settings.svg", id="menu-image">
+                </div>
+                <div class="menu-options">
+                    <button id="menu-option">Profile</button>
+                    <button id="menu-option">Messages</button>
+                    <button id="menu-option">Groups</button>
+                    <button id="menu-option">Friends</button>
+                    <button id="menu-option">Settings</button>  
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="form-container profile-container">
+                <form class="profile-form">
+                    <div class="avatar">
+                        <img src="../img/avatar.svg">
+                        <div class="change-avatar" onclick="alert('chuj')">change avatar</div>
+                    </div> 
+                    <label>
+                        <div>Old password</div>
+                        <input name="Old password" type="password">
+                    </label>
+                    <label>
+                        <div>New password</div>
+                        <input name="New password" type="password">
+                    </label>
+                    <label>
+                        <div>Repeat password</div>
+                        <input name="Repeat password" type="password">
+                    </label> 
+                    <button id="change-password">change password</button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</body>

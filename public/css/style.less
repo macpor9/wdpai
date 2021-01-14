@@ -1,28 +1,31 @@
 @main_background_color: #D4D26A;
 @main_background_gradient: transparent linear-gradient(180deg, #D7D93A 0%, #D4D26A 45%, #989A29 100%, #8C8E25FA 100%, #A4A62C6B 100%, #6C6D1D 100%) 0% 0% no-repeat padding-box;
 
-body{
+body {
     margin: 0;
 }
 
 .container {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background: @main_background_gradient;
 
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+
     .logo {
         width: 50%;
         text-align: center;
     }
 }
 
+
 .bar {
+    align-self: stretch;
     width: 20vw;
-    height: 100vh;
     border: 1px solid #707070;
     background: @main_background_gradient;
     box-sizing: border-box;
@@ -37,41 +40,71 @@ body{
         }
     }
 
-    .menu-bar {
-        display: flex;
-        flex-direction: row;
-    
-        .menu-images {
-            margin-top: 12%;
-            width: 25%;
-            
-            #menu-image{
-                width: 50%;
-                margin-left: 20%;
-                margin-top: 30%;
-            }
+    .menu-bar1 {
+        display: grid;
+
+        grid-template-columns: 1fr 3fr;
+        gap: 0.6em;
+        padding: 0.5em;
+        margin-top: 4em;
+        margin-right: 2em;
+        justify-content: center;
+        font-size: 1.7em;
+        width: 100%;
+        padding: 0.2em;
+        box-sizing: border-box;
+
+
+        .menu-bar-button {
+            line-height: 2em;
         }
-        .menu-options {
-            margin-top: 10%;
-            align-self: flex-end;
-            width: 70%;
-            #menu-option {
-                width: 70%;
-                margin-left: 10%;
-                margin-top: 10%;
-            }
+        .menu-image {
+            align-self: center;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        & > *{
+            width: 100%;
         }
     }
+    
 }
 
-.content {
-    width: 80vw;
-    height: 100vh;
+.right-panel {
+    align-self: stretch;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: @main_background_color
+    width: 80vw;
+    min-height: 100vh;
+    background: @main_background_color;
+
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        align-self: flex-start;
+        margin-left: 0.6em;
+        margin-top: 0.4em;
+        font-size: 5em;
+        width: 100%;
+
+
+        .header-text {
+            margin-left: 0.2em;
+            color: #621046;
+
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;  
+    }
+
 }
 
 
@@ -103,6 +136,37 @@ form {
 }
 
 
+.profile {
+    background: @main_background_color;
+    box-shadow: none;
+}
+
+.friends-content {
+    display: flex;
+    flex-wrap: wrap;
+
+    .friend-container {
+        margin-left: 10em;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 0.5em;
+
+        .text{
+            margin-top: 0.2em;
+            margin-bottom: 5em;
+            align-self: center;
+            font-size: 1em;
+            border: 1em solid #621046;
+                        
+            background-color: #621046;
+            color: #D7D93A;
+        }
+    }
+
+    
+}
+
+
 .button-container {
     display: flex;
     flex-direction: row;
@@ -116,7 +180,10 @@ form {
     width: 30%;
 }
 
-button {
+.button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
     background: transparent linear-gradient(180deg, #982771 0%, #621046 100% )0% 0% no-repeat padding-box;
     border-color: #4c0e37;
     border-radius: 10px;
@@ -139,7 +206,7 @@ input {
 label {
     border: 1px solid #621046;
     margin: 1em;
-    width: 60%;
+    width: 15em;
 
 }
 
@@ -153,6 +220,21 @@ label > div {
     height: 1em;
     color: #621046;
     width: fit-content;
+}
+
+.profile {
+    label > div {
+
+        margin-top: 0;
+        margin-left: 0;
+        padding-left: 0;
+        padding-right:0;
+    }
+    label {
+        border: none;
+        margin: 1em;
+        width: 15em;
+    }
 }
 
 .profile-container label > div {
@@ -181,4 +263,41 @@ label > div {
         text-align: center;
         cursor: pointer;
     }
+}
+
+
+@media only screen and (max-device-width: 420px) {
+    .container {
+        flex-direction: column;
+    }
+
+    *{
+        font-size: 30px;
+    }
+
+    form{
+        width: 100%;
+    }
+
+
+    .container {
+        .logo {
+            width: 70%;
+        }
+    }
+
+    img{
+        width: 100%;
+    }
+
+    .form-container {
+        width: 80%;
+        margin: 0;
+        justify-content: center;
+
+        .login-form {
+            margin: 0;
+        }
+    }
+
 }

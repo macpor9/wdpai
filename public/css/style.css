@@ -3,7 +3,7 @@ body {
 }
 .container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: transparent linear-gradient(180deg, #D7D93A 0%, #D4D26A 45%, #989A29 100%, #8C8E25FA 100%, #A4A62C6B 100%, #6C6D1D 100%) 0% 0% no-repeat padding-box;
   display: flex;
   flex-direction: row;
@@ -15,8 +15,8 @@ body {
   text-align: center;
 }
 .bar {
+  align-self: stretch;
   width: 20vw;
-  height: 100vh;
   border: 1px solid #707070;
   background: transparent linear-gradient(180deg, #D7D93A 0%, #D4D26A 45%, #989A29 100%, #8C8E25FA 100%, #A4A62C6B 100%, #6C6D1D 100%) 0% 0% no-repeat padding-box;
   box-sizing: border-box;
@@ -30,37 +30,57 @@ body {
   width: 80%;
   height: 80%;
 }
-.bar .menu-bar {
+.bar .menu-bar1 {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 0.6em;
+  padding: 0.5em;
+  margin-top: 4em;
+  margin-right: 2em;
+  justify-content: center;
+  font-size: 1.7em;
+  width: 100%;
+  padding: 0.2em;
+  box-sizing: border-box;
+}
+.bar .menu-bar1 .menu-bar-button {
+  line-height: 2em;
+}
+.bar .menu-bar1 .menu-image {
+  align-self: center;
+  text-align: center;
+  font-size: 2em;
+}
+.bar .menu-bar1 > * {
+  width: 100%;
+}
+.right-panel {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  min-height: 100vh;
+  background: #D4D26A;
+}
+.right-panel .header {
   display: flex;
   flex-direction: row;
+  align-self: flex-start;
+  margin-left: 0.6em;
+  margin-top: 0.4em;
+  font-size: 5em;
+  width: 100%;
 }
-.bar .menu-bar .menu-images {
-  margin-top: 12%;
-  width: 25%;
+.right-panel .header .header-text {
+  margin-left: 0.2em;
+  color: #621046;
 }
-.bar .menu-bar .menu-images #menu-image {
-  width: 50%;
-  margin-left: 20%;
-  margin-top: 30%;
-}
-.bar .menu-bar .menu-options {
-  margin-top: 10%;
-  align-self: flex-end;
-  width: 70%;
-}
-.bar .menu-bar .menu-options #menu-option {
-  width: 70%;
-  margin-left: 10%;
-  margin-top: 10%;
-}
-.content {
-  width: 80vw;
-  height: 100vh;
+.right-panel .content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #D4D26A;
+  height: 100%;
 }
 .form-container {
   width: 50%;
@@ -80,6 +100,29 @@ form {
   background: #D4D26A;
   box-shadow: none;
 }
+.profile {
+  background: #D4D26A;
+  box-shadow: none;
+}
+.friends-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.friends-content .friend-container {
+  margin-left: 10em;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.5em;
+}
+.friends-content .friend-container .text {
+  margin-top: 0.2em;
+  margin-bottom: 5em;
+  align-self: center;
+  font-size: 1em;
+  border: 1em solid #621046;
+  background-color: #621046;
+  color: #D7D93A;
+}
 .button-container {
   display: flex;
   flex-direction: row;
@@ -90,7 +133,10 @@ form {
 #change-password {
   width: 30%;
 }
-button {
+.button {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
   background: transparent linear-gradient(180deg, #982771 0%, #621046 100%) 0% 0% no-repeat padding-box;
   border-color: #4c0e37;
   border-radius: 10px;
@@ -111,7 +157,7 @@ input {
 label {
   border: 1px solid #621046;
   margin: 1em;
-  width: 60%;
+  width: 15em;
 }
 label > div {
   background-color: #BBB735;
@@ -123,6 +169,17 @@ label > div {
   height: 1em;
   color: #621046;
   width: fit-content;
+}
+.profile label > div {
+  margin-top: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.profile label {
+  border: none;
+  margin: 1em;
+  width: 15em;
 }
 .profile-container label > div {
   background: #D4D26A;
@@ -146,5 +203,30 @@ label > div {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   cursor: pointer;
+}
+@media only screen and (max-device-width: 420px) {
+  .container {
+    flex-direction: column;
+  }
+  * {
+    font-size: 30px;
+  }
+  form {
+    width: 100%;
+  }
+  .container .logo {
+    width: 70%;
+  }
+  img {
+    width: 100%;
+  }
+  .form-container {
+    width: 80%;
+    margin: 0;
+    justify-content: center;
+  }
+  .form-container .login-form {
+    margin: 0;
+  }
 }
 /*# sourceMappingURL=style.css.map */

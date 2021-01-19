@@ -19,6 +19,6 @@
         <a class="menu-option menu-bar-button button" href="/settings">Settings</a>
 
         <i class="fas fa-sign-out-alt menu-image"></i>
-        <a class="menu-option menu-bar-button button" href="/index">Logout</a>
+        <a class="menu-option menu-bar-button button" href="login">Logout</a>
     </div>
 </div>

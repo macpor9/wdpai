@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <?php
+    require "head.php";
+    ?>
     <title>login</title>
 </head>
 <body>  
@@ -10,20 +10,30 @@
         <div class="logo">
             <img src="public/img/logo.svg">
         </div>
-        <div class="form-container">
-            <form class="login-form">
-                <label>
-                    <div>login</div>
+        <div class="form-container input-form">
+            <div class = "messages">
+                <?php
+                if(isset($messages)){
+                    foreach ($messages as $message)
+                    echo $message;
+                }
+                    ?>
+            </div>
+            <form action="login" method="POST">
+                <label class="form-field">
+                    <span class="field-name-form">login</span>
                     <input name="login" type="text">
                 </label> 
-                <label>
-                    <div>password</div>
+                <label class="form-field">
+                    <span class="field-name-form">password</span>
                     <input name="password" type="password">
                 </label>
     
                 <div class="button-container">
-                    <a class="menu-option menu-bar-button button" href="file:///G:/studia/Aplikacje%20Internetowe/docker/public/views/settings.html">Login</a>  
-                    <a class="menu-option menu-bar-button button" href="file:///G:/studia/Aplikacje%20Internetowe/docker/public/views/register.html">Sign up</a>  
+                    <input class="menu-option menu-bar-button button" type="submit" value="Login">
+                    <form action="register" method="GET">
+                        <input class="menu-option menu-bar-button button" type="submit" value="Sign up">
+                    </form>
                 </div>
                     
             </form>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <?php
+    require "head.php";
+    ?>
     <title>register</title>
 </head>
 <body>  
@@ -11,25 +11,25 @@
             <img src="public/img/logo.svg">
         </div>
         <div class="form-container register-container">
-            <form class="register-form">
-                <label>
-                    <div>email</div>
+            <form class="register-form input-form">
+                <label class="form-field">
+                    <span class="field-name-form">email</span>
                     <input name="email" type="text">
                 </label> 
-                <label>
-                    <div>password</div>
+                <label class="form-field">
+                    <span class="field-name-form">password</span>
                     <input name="password" type="text">
                 </label>
-                <label>
-                    <div>email</div>
+                <label class="form-field">
+                    <span class="field-name-form">email</span>
                     <input name="email" type="text">
                 </label> 
-                <label>
-                    <div>password</div>
+                <label class="form-field">
+                    <span class="field-name-form">password</span>
                     <input name="password" type="password">
                 </label>
-                <label>
-                    <div>repeat password</div>
+                <label class="form-field">
+                    <span class="field-name-form">repeat password</span>
                     <input name="repeat password" type="password">
                 </label>
 

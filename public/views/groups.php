@@ -60,15 +60,13 @@
                 <span class="field-name">group name</span>
                 <input name="group-name" type="text">
             </label>
-
-        </form>
-        <form action="changeGroupAvatar" method="POST" ENCTYPE="multipart/form-data">
             <div class="messages">
                 <?php
                 if(isset($messages)){
                     foreach ($messages as $message)
                         echo $message;
                 }
+                echo $groupName;
                 ?>
             </div>
             <input type="file" accept=".png,.jpg,.jpeg" name="file">

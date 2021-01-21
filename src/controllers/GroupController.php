@@ -30,10 +30,16 @@ class GroupController extends AppController{
 
     public function addGroup(){
         $this->changeGroupAvatar();
-        $groupName = $_POST['groupName'];
+        $groupName = $_POST['group-name'];
         $url = "http://".$_SERVER['HTTP_HOST'];
-        header("Location: {$url}/groups");
+//        header("Location: {$url}/groups");
+        $this->render('groups', [
+            'messages' => $this->messages,
+            'groupName'=> $groupName
+        ]);
     }
+
+
 
     private function validate(array $file): bool
     {

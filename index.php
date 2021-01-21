@@ -15,6 +15,8 @@ Routing::get('settings','ProfileController');
 Routing::post('login','SecurityController');
 Routing::post('changeAvatar','ProfileController');
 
+Routing::post('changeGroupAvatar','GroupController');
+
 
 
 

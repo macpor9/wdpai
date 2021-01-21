@@ -2,19 +2,18 @@
 
 require_once 'AppController.php';
 
-class ProfileController extends AppController {
-
+class GroupController extends AppController{
     public function settings(){
-        $this->render('settings');
+        $this->render('groups');
     }
 
-    private $messages = [];
     const MAX_FILE_SIZE = 1024*1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpg', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
+    private $messages = [];
 
-    public function changeAvatar()
+    public function changeGroupAvatar()
     {
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file(
@@ -26,10 +25,15 @@ class ProfileController extends AppController {
 
 //            return $this->render('settings', ['messages' => $this->message]);
         }
-        return $this->render('settings', ['messages' => $this->message]);
+//        return $this->render('groups', ['messages' => $this->message]);
     }
 
-
+    public function addGroup(){
+        $this->changeGroupAvatar();
+        $groupName = $_POST['groupName'];
+        $url = "http://".$_SERVER['HTTP_HOST'];
+        header("Location: {$url}/groups");
+    }
 
     private function validate(array $file): bool
     {
@@ -44,5 +48,4 @@ class ProfileController extends AppController {
         }
         return true;
     }
-
 }

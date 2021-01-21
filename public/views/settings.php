@@ -27,7 +27,7 @@
 
 
 <!--                                <input name="Change Avatar" type="file">-->
-                                <button onclick="showSettingsPopup()">change avatar</button>
+                                <button  class="button-image" onclick="showPopup('change-avatar-popup')">change avatar</button>
                             </div>
 
 
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-<div class="change-avatar-popup" id="settings-popup" >
+<div class="popup-window" id="change-avatar-popup" >
     <div class="inner">
         <form action="changeAvatar" method="POST" ENCTYPE="multipart/form-data">
             <div class="messages">
@@ -66,7 +66,7 @@
                 }
                 ?>
             </div>
-            <input type="file" name="file">
+            <input type="file" accept=".png,.jpg,.jpeg" name="file">
             <button type="submit">send</button>
         </form>
     </div>

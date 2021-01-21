@@ -43,6 +43,11 @@ body {
     border: 1px solid @secondary_color;
     background: @main_background_gradient;
     box-sizing: border-box;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+
 
     .logo-bar{
         width: 100%;
@@ -91,6 +96,7 @@ body {
     width: 100%;
     min-height: 100vh;
     background: @main_background_color;
+    margin-left: 20vw;
 
 
     .header {
@@ -166,6 +172,20 @@ body {
     }
 }
 
+.button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    //padding: 0;
+    background: transparent linear-gradient(180deg, #982771 0%, @secondary_color 100% )0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    border: none;
+    width:7em;
+    height: 2em;
+    color: #D7D93A;
+    line-height: 1em;
+    cursor: pointer;
+}
 
 .profile {
     align-items: center;
@@ -175,6 +195,10 @@ body {
     box-shadow: none;
 
 
+}
+#add-group-button{
+    width: 10em;
+    margin-top: 3em;
 }
 
 .friends-content {
@@ -199,8 +223,36 @@ body {
             color: #D7D93A;
         }
     }
+}
+
+.groups-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .groups-container{
+        display: flex;
+        flex-direction: column;
+        width: 17em;
+        height: 20em;
+        margin: 3.5em;
+        align-self: center;
+        justify-content: center;
 
 
+        img{
+
+            width: 17em;
+            height: 17em;
+            object-fit: fill;
+        }
+
+        .button{
+            display: block;
+        }
+    }
 }
 
 
@@ -230,20 +282,6 @@ input {
 
 }
 
-.button {
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    //padding: 0;
-    background: transparent linear-gradient(180deg, #982771 0%, @secondary_color 100% )0% 0% no-repeat padding-box;
-    border-radius: 10px;
-    border: none;
-    width:7em;
-    height: 2em;
-    color: #D7D93A;
-    line-height: 1em;
-    cursor: pointer;
-}
 
 
 .form-field {
@@ -295,7 +333,7 @@ input {
     img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: fill    ;
     }
 
     .change-avatar {
@@ -303,19 +341,43 @@ input {
         bottom: 0;
         left: 0;
         right: 0;
+        width: 100%;
         font-size: 1.3em;
-        background-color: rgba(255, 255, 255, 0.8);
+        //background-color: rgba(255, 255, 255, 0.8);
         text-align: center;
         cursor: pointer;
 
-        .button{
-            line-height: 1em;
-            display: block;
-        }
+
+
+        //.button-image{
+        //    //background-color: rgba(255, 255, 255, 0.8);
+        //    margin: 0;
+        //    width: 100%;
+        //    box-sizing: border-box;
+        //    height: inherit;
+        //    line-height: 1em;
+        //    font-size: 1.2em;
+        //    border: none;
+        //    color: rgba(0, 0, 0);
+        //    background: rgba(255, 255, 255, 0.8);
+        //    border-radius: 0;
+        //}
     }
 }
-
-.change-avatar-popup{
+.button-image{
+    //background-color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    height: 1.2em;
+    line-height: 1em;
+    font-size: 1.2em;
+    border: none;
+    color: rgba(0, 0, 0);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 0;
+}
+.popup-window{
     z-index: 219;
     position: fixed;
     background: rgb(0 0 0 / 59%);
@@ -327,13 +389,31 @@ input {
     justify-content: center;
     display: none;
 
+
+
     .inner {
-        //align-self: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         height: 40em;
         width: 40em;
-        background:@secondary_background_gradient;
+        //background:@secondary_background_gradient;
+        background: @main_background_color;
         box-shadow: 0 0 9px 3px black;
         border-radius: 15px;
+        text-align: center;
+        justify-content: center;
+
+
+        input {
+            color: black;
+            cursor: pointer;
+            padding: 5px;
+            display: block;
+            //text-shadow: 1px 1px 1px #000000;
+
+            //text-align: center;
+        }
     }
 
     &.show{
@@ -375,6 +455,8 @@ input {
 
     .header {
         margin-bottom: 0.3em;
+        display: flex;
+        flex-direction: column;
 
         .header-text{
             font-size: 0.8em;

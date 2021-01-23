@@ -11,7 +11,16 @@
             <img src="public/img/logo.svg">
         </div>
         <div class="form-container register-container">
-            <form class="register-form input-form">
+            <form class="register-form input-form" action="register" method="POST">
+                <div class="messages">
+                    <?php
+                    if(isset($messages)){
+                        foreach($messages as $message) {
+                            echo $message;
+                        }
+                    }
+                    ?>
+                </div>
                 <label class="form-field">
                     <span class="field-name-form">login</span>
                     <input name="login" type="text">
@@ -31,7 +40,7 @@
                 
                 
                 <div class="button-container">
-                    <a class="menu-option menu-bar-button button" href="file:///G:/studia/Aplikacje%20Internetowe/docker/public/views/settings.html">Sign up</a>  
+                    <button class="menu-option menu-bar-button button" type="submit" ">Sign up</button>
                 </div>
                     
             </form>

@@ -6,10 +6,20 @@ require_once __DIR__."/../repository/UserRepository.php";
 require_once __DIR__."/../repository/GroupRepository.php";
 
 Class SecurityController extends AppController {
+
+
+    private $userRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->userRepository = new UserRepository();
+    }
+
     public function login(){
-
-
         $userRepository = new UserRepository();
+
+
 
         if(!$this->isPost()){
             return $this->render('login');
@@ -34,4 +44,27 @@ Class SecurityController extends AppController {
         header("Location: {$url}/profile");
 
     }
+
+    public function register(){
+
+        if (!$this->isPost()) {
+            return $this->render('register');
+        }
+
+        $login = $_POST['login'];
+        $password = $_POST['password'];
+        $repeatPassword = $_POST['repeat-password'];
+
+        if($password != $repeatPassword)
+            $this->render('register', ["messages" => ["Passwords are different!"]]);
+
+        $user = new User($login,$password);
+        $this->userRepository->register($user);
+
+        return $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
+
+
+    }
+
+
 }

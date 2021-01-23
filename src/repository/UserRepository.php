@@ -43,4 +43,22 @@ class UserRepository extends Repository{
         return $result;
     }
 
+    public function register($user): void{
+        $stmt = $this->database->connect()->prepare(
+          "INSERT INTO users (login,password,description,avatar_path)
+                 VALUES (?,?,?,?)
+                 "
+        );
+
+        $stmt->execute([
+            $user->getLogin(),
+            $user->getPassword(),
+            $user->getDescription(),
+            $user->getAvatarPath()
+        ]);
+    }
+
+
+
+
 }

@@ -34,8 +34,10 @@ class GroupController extends AppController{
 
 
 
-            return $this->render('groups', ['messages' => $this->message]);
+//            return $this->render('groups', ['messages' => $this->message]);
 
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/groups");
         }
         return $this->render('groups', ['messages' => $this->message]);
     }
@@ -57,8 +59,13 @@ class GroupController extends AppController{
 
 
     public function groups(){
+
+
         $groups = $this->groupRepository->getGroups();
         $this->render('groups',['groups' => $groups]);
+
+
+
     }
 
 }

@@ -67,7 +67,7 @@
                 ?>
             </div>
             <input type="file" accept=".png,.jpg,.jpeg" name="file">
-            <button type="submit">send</button>
+            <button class="button" type="submit">send</button>
         </form>
     </div>
 </div>

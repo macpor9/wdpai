@@ -1,8 +1,14 @@
 <?php
 
 require_once 'AppController.php';
+require_once __DIR__."/../repository/UserRepository.php";
+
 
 class ProfileController extends AppController {
+
+    public function profile(){
+        $this->render('profile');
+    }
 
     public function settings(){
         $this->render('settings');
@@ -12,6 +18,13 @@ class ProfileController extends AppController {
     const MAX_FILE_SIZE = 1024*1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpg', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
+
+    private $userRepository;
+
+    public function __construct(){
+        parent::__construct();
+        $this->userRepository = new UserRepository();
+    }
 
 
     public function changeAvatar()
@@ -43,6 +56,11 @@ class ProfileController extends AppController {
             return false;
         }
         return true;
+    }
+
+    public function friends(){
+        $friends = $this->userRepository->getUsers();
+        $this->render('friends',['friends' => $friends]);
     }
 
 }

@@ -12,12 +12,6 @@ class DefaultController extends AppController {
     public function settings(){
         $this->render('settings');
     }
-    public function profile(){
-        $this->render('profile');
-    }
-    public function groups(){
-        $this->render('groups');
-    }
     public function friends(){
         $this->render('friends');
     }

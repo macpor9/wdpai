@@ -421,6 +421,40 @@ input {
     }
 }
 
+.user-list-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: start;
+
+    .user-container{
+        display: flex;
+        flex-direction: row;
+        margin: 3em;
+
+        .img-container{
+            .img{
+            width: 7em;
+            height: 7em;
+            object-fit: fill;
+            }
+        }
+
+        .user-data-container{
+            display: flex;
+            flex-direction: column;
+
+        }
+    }
+}
+
+.no-valid{
+    border:4px red solid;
+    border-radius: 1em;
+    box-shadow: 0 0 0.2em red;
+    outline: none;
+}
+
 @media only screen and (max-device-width: 420px) {
     .container {
         background: @main_background_gradient;

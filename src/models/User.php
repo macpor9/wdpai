@@ -4,15 +4,16 @@
 class User{
     private $login;
     private $password;
-    private $name;
-    private $surname;
+    private $avatar_path;
+    private $description;
 
-    public function __construct(string $login,string $password,string $name,string $surname)
+
+    public function __construct(string $login,string $password, string $avatar_path = "default_avatar.png", string $description = "")
     {
         $this->login = $login;
         $this->password = $password;
-        $this->name = $name;
-        $this->surname = $surname;
+        $this->avatar_path = $avatar_path;
+        $this->description = $description;
     }
 
     public function getLogin(): string
@@ -35,27 +36,25 @@ class User{
         $this->password = $password;
     }
 
-    public function getName(): string
+    public function getAvatarPath(): string
     {
-        return $this->name;
+        return $this->avatar_path;
     }
 
-    public function setName(string $name): void
+    public function setAvatarPath(string $avatar_path): void
     {
-        $this->name = $name;
+        $this->avatar_path = $avatar_path;
     }
 
-    public function getSurname(): string
+    public function getDescription(): string
     {
-        return $this->surname;
+        return $this->description;
     }
 
-    public function setSurname(string $surname): void
+    public function setDescription(string $description): void
     {
-        $this->surname = $surname;
+        $this->description = $description;
     }
-
-
 
 
 }

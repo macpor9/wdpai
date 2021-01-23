@@ -64,3 +64,56 @@ function hidePopup(event){
         i.classList.remove("show");
     }
 }
+
+
+// const confirmedPasswordInput = form.querySelector('input[name="repeat-password"]')
+// function arePasswordsSame(password, confirmedPassword){
+//     return password===confirmedPassword;
+// };
+//
+// function markValidation(element, condition){
+//     if (!condition)
+//         element.classList.add('no-valid')
+//     else
+//         element.classList.remove('no-valid')
+//
+// };
+//
+// confirmedPasswordInput.addEventListener('keyup', function (){
+//     setTimeout(function(){
+//         console.log("sadadsadsasd");
+//         const condition = !arePasswordsSame(
+//             confirmedPasswordInput.value,confirmedPasswordInput.previousElementSibling.value
+//         )
+//         markValidation(confirmedPasswordInput, condition)
+//     });
+// });
+
+const form = document.querySelector("form");
+const confirmedPasswordInput = form.querySelector('input[name="repeat-password"]');
+
+
+function arePasswordsSame(password, confirmedPassword) {
+    return password === confirmedPassword;
+}
+
+function markValidation(element, condition) {
+    !condition ? element.classList.add('no-valid') : element.classList.remove('no-valid');
+}
+
+
+function validatePassword() {
+    setTimeout(function () {
+            const condition = arePasswordsSame(
+                confirmedPasswordInput.previousElementSibling.value,
+                confirmedPasswordInput.value
+            );
+            markValidation(confirmedPasswordInput, condition);
+        },
+        1000
+    );
+}
+
+confirmedPasswordInput.addEventListener('keyup', validatePassword);
+
+

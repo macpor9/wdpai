@@ -25,30 +25,34 @@
                 <button class="button" id="add-group-button" onclick="showPopup('add-group-popup')">add group</button>
             </div>
             <div class="groups-content">
+                <?php
+                    $number = 0;
+                    foreach ($groups as $group):
+                ?>
                 <div class="groups-container">
-                    <img src="public/img/groups/red.png">
-                    <button class = "button-image" onclick="showPopup('view-group-popup')">groupname</button>
+                    <img src="public/img/<?= $group->getAvatarPath(); ?>">
+                    <button class = "button-image" onclick=showPopup("view-group-popup<?=$number?>")><?= $group->getName(); ?></button>
                 </div>
-                <div class="groups-container">
-                    <img src="public/img/groups/blue.png">
-                    <button class = "button-image" onclick="showPopup('view-group-popup')">grpname1</button>
+                <div class="popup-window" id="view-group-popup<?=$number?>" >
+                    <div class="inner">
+                        <div>
+                            <label class="label-class form-field">
+                                <span class="field-name">groupname</span>
+                                <span><?= $group->getName(); ?></span>
+
+                            </label>
+                        </div>
+                        <div class="groups-container">
+                            <img src="public/img/<?= $group->getAvatarPath(); ?>">
+
+                        </div>
+                        <div>
+                            <input type="file" accept=".png,.jpg,.jpeg" name="file">
+                        </div>
+                        <button class="button" type="submit">send</button>
+                    </div>
                 </div>
-                <div class="groups-container">
-                    <img src="public/img/groups/purple.png">
-                    <button class = "button-image" onclick="showPopup('view-group-popup')">group2</button>
-                </div>
-                <div class="groups-container">
-                    <img src="public/img/groups/black.png">
-                    <button class = "button-image" onclick="showPopup('view-group-popup')">groupname3</button>
-                </div>
-                <div class="groups-container">
-                    <img src="public/img/groups/brown.png">
-                    <button class = "button-image" onclick="showPopup('view-group-popup')">grname4</button>
-                </div>
-                <div class="groups-container">
-                    <img src="public/img/groups/grey.png">
-                    <button class = "button-image" onclick="showPopup('view-group-popup')">groupnamesdaas5</button>
-                </div>
+                <?php $number++; endforeach; ?>
             </div>
         </div>
     </div>
@@ -61,36 +65,18 @@
                 <input name="group-name" type="text">
             </label>
             <div class="messages">
-                <?php
-                if(isset($messages)){
-                    foreach ($messages as $message)
-                        echo $message;
-                }
-                echo $groupName;
-                ?>
+<!--                --><?php
+//                if(isset($messages)){
+//                    foreach ($messages as $message)
+//                        echo $message;
+//                }
+//                echo $groupName;
+//                ?>
             </div>
-            <input type="file" accept=".png,.jpg,.jpeg" name="file">
-            <button type="submit">send</button>
+            <input class="" type="file" accept=".png,.jpg,.jpeg" name="file">
+            <button class=" button" type="submit">send</button>
         </form>
     </div>
 </div>
-<div class="popup-window" id="view-group-popup" >
-    <div class="inner">
-        <div>
-            <label class="label-class form-field">
-                <span class="field-name">groupname</span>
-                <span>grupa1</span>
 
-            </label>
-        </div>
-        <div class="groups-container">
-            <img src="public/img/groups/red.png">
-
-        </div>
-        <div>
-            <input type="file" accept=".png,.jpg,.jpeg" name="file">
-        </div>
-            <button type="submit">send</button>
-    </div>
-</div>
 </body>

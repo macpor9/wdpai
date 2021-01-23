@@ -1,0 +1,46 @@
+<?php
+
+require_once 'Repository.php';
+require_once __DIR__.'/../models/User.php';
+
+class UserRepository extends Repository{
+    public function getUser(string $login): ?User{
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM users WHERE login = :login
+        ');
+        $stmt->bindParam(':login', $login, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($user == false)
+            return null;
+
+        return new User(
+            $user['login'],
+            $user['password']
+        );
+    }
+
+    public function getUsers(): array
+    {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM users NATURAL JOIN user_details;
+        ');
+        $stmt->execute();
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($users as $user) {
+            $result[] = new User(
+                $user['login'],
+                $user['password'],
+                $user['avatar_path'],
+            );
+        }
+
+        return $result;
+    }
+
+}

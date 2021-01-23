@@ -13,25 +13,18 @@
         <div class="form-container register-container">
             <form class="register-form input-form">
                 <label class="form-field">
-                    <span class="field-name-form">email</span>
-                    <input name="email" type="text">
+                    <span class="field-name-form">login</span>
+                    <input name="login" type="text">
                 </label> 
                 <label class="form-field">
                     <span class="field-name-form">password</span>
                     <input name="password" type="text">
                 </label>
                 <label class="form-field">
-                    <span class="field-name-form">email</span>
-                    <input name="email" type="text">
-                </label> 
-                <label class="form-field">
-                    <span class="field-name-form">password</span>
-                    <input name="password" type="password">
-                </label>
-                <label class="form-field">
                     <span class="field-name-form">repeat password</span>
-                    <input name="repeat password" type="password">
-                </label>
+                    <input name="repeat-password" type="text">
+                </label> 
+
 
                 
                

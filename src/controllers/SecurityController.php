@@ -35,7 +35,11 @@ Class SecurityController extends AppController {
         if($user->getLogin() !== $login){
             return $this->render('login', ["messages" => ["User with this login does not exist"]]);
         }
-        if($user->getPassword() !== $password){
+
+
+
+        if($user->getPassword() !== hash("sha512",$password)){
+//        if($userRepository->getPasswordByLogin($login) !== $password){
             return $this->render('login', ["messages" => ["Wrong password!"]]);
         }
 //        return $this->render('profile');
@@ -58,13 +62,30 @@ Class SecurityController extends AppController {
         if($password != $repeatPassword)
             $this->render('register', ["messages" => ["Passwords are different!"]]);
 
-        $user = new User($login,$password);
+        $user = new User($login,hash("sha512",$password));
         $this->userRepository->register($user);
 
         return $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
 
 
     }
+
+    public function removeUser(){
+        if(!$this->isPost()){
+            return $this->render('friends');
+        }
+
+        $login = $_POST['login'];
+        $this->userRepository->removeUser($login);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/friends");
+
+    }
+
+    public function register_href(){
+        $this->render('register');
+}
 
 
 }

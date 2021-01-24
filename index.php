@@ -19,6 +19,8 @@ Routing::post('changeAvatar','ProfileController');
 Routing::post('changeGroupAvatar','GroupController');
 Routing::post('addGroup','GroupController');
 
+Routing::post('removeUser','SecurityController');
+
 
 
 

@@ -27,7 +27,7 @@ class ProfileController extends AppController {
     }
 
 
-    public function changeAvatar()
+    public function changeAvatar1()
     {
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file(
@@ -62,5 +62,6 @@ class ProfileController extends AppController {
         $friends = $this->userRepository->getUsers();
         $this->render('friends',['friends' => $friends]);
     }
+
 
 }

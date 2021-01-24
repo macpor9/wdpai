@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <head>
     <?php
-    require "head.php";
+    require __DIR__."/../includes/head.php";
     ?>
     <title>settings</title>
 </head>
 <body>  
     <div class="container">
         <?php
-            require "navigation.php";
+            require __DIR__."/../includes/navigation.php";
         ?>
         <div class="right-panel">
             <div class="header">

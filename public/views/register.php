@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <?php
-    require "head.php";
+    require __DIR__."/../includes/head.php";
     ?>
     <title>register</title>
 </head>

@@ -28,7 +28,7 @@ class GroupRepository extends Repository{
             VALUES (?,?,?)
         ');
 
-        $id_assigned_by = 1;
+        $id_assigned_by = 6;
         $stmt->execute([
             $group->getName(),
             $group->getAvatarPath(),

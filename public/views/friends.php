@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <head>
     <?php
-    require "head.php";
+    require __DIR__."/../includes/head.php";
     ?>
     <title>friends</title>
 </head>
 <body>  
     <div class="container">
         <?php
-        require "navigation.php";
+        require __DIR__."/../includes/navigation.php";
         ?>
         <div class="right-panel">
             <div class="header">
@@ -23,17 +23,23 @@
                     <?php
                     foreach ($friends as $user):
                     ?>
-                    <div class="user-container">
+                    <form class="user-container" action="removeUser" method="POST">
                             <div class="img-container">
                                 <img class="img" src="public/img/<?= $user->getAvatarPath(); ?>">
                             </div>
                             <div class="user-data-container">
-                                <?= $user->getLogin(); ?>
-                                <?= $user->getPassword(); ?>
-                                <?= $user->getDescription(); ?>
+                                <label class="label-class form-field">
+                                    <span class="field-name">login</span>
+                                    <input type="hidden" name='login' value="<?= $user->getLogin(); ?>"  />
+                                    <span><?= $user->getLogin(); ?></span>
+                                </label>
+                                <button class="button" type="submit" ">remove user</button>
+                            </div>
+                            <div>
+
                             </div>
 
-                    </div>
+                    </form>
                     <?php  endforeach; ?>
                 </div>
 <!--                    <div class="friend-container">-->

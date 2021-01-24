@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <?php
-    require "head.php";
+    require __DIR__."/../includes/head.php";
     ?>
     <title>login</title>
 </head>
@@ -31,7 +31,7 @@
     
                 <div class="button-container">
                     <input class="menu-option menu-bar-button button" type="submit" value="Login">
-                    <form action="register" method="GET">
+                    <form action="registerHref" method="GET">
                         <input class="menu-option menu-bar-button button" type="submit" value="Sign up">
                     </form>
                 </div>

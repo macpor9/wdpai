@@ -27,7 +27,7 @@ class UserRepository extends Repository{
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM users NATURAL JOIN user_details;
+            SELECT * FROM users ;
         ');
         $stmt->execute();
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -43,6 +43,7 @@ class UserRepository extends Repository{
         return $result;
     }
 
+
     public function register($user): void{
         $stmt = $this->database->connect()->prepare(
           "INSERT INTO users (login,password,description,avatar_path)
@@ -56,6 +57,17 @@ class UserRepository extends Repository{
             $user->getDescription(),
             $user->getAvatarPath()
         ]);
+    }
+
+    public function removeUser($login){
+        $stmt = $this->database->connect()->prepare("
+            DELETE FROM users WHERE (login = :login)
+        ");
+
+        $stmt->bindValue(':login',$login);
+
+
+        $stmt->execute();
     }
 
 

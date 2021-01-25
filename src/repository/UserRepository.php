@@ -64,13 +64,49 @@ class UserRepository extends Repository{
             DELETE FROM users WHERE (login = :login)
         ");
 
+
         $stmt->bindValue(':login',$login);
 
 
         $stmt->execute();
     }
 
+    public function changeAvatar($avatarPath){
+        $id = 20;
+        $stmt = $this->database->connect()->prepare("
+            UPDATE users SET avatar_path = :avatar_path WHERE (id = :id)
+        ");
+        $stmt->bindParam(':avatar_path', $avatarPath, PDO::PARAM_STR);
+        $stmt->bindValue(':id',$id);
+        $stmt->execute();
+    }
 
+
+
+    public function changePassword($newPassword, $oldPassword){
+        $id = 20;
+        $stmt = $this->database->connect()->prepare("
+            UPDATE users SET password = :newPassword WHERE (id = :id and password = :oldPassword)
+        ");
+
+        $stmt->bindValue(':id',$id);
+        $stmt->bindParam(':newPassword',$newPassword,PDO::PARAM_STR);
+        $stmt->bindParam(':oldPassword',$oldPassword,PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function getUserByLogin(string $searchLogin){
+        $searchLogin = '%'.strtolower($searchLogin).'%';
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM users WHERE LOWER(login) LIKE :searchLogin
+        ');
+
+        $stmt->bindParam(':searchLogin',$searchLogin, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
 }

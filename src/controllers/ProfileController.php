@@ -27,22 +27,49 @@ class ProfileController extends AppController {
     }
 
 
-    public function changeAvatar1()
+    public function changeAvatar()
     {
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file(
                 $_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
+            $this->userRepository->changeAvatar($_FILES['file']['name']);
 
 
 
-//            return $this->render('settings', ['messages' => $this->message]);
+
+
+
+            return $this->render('settings', ['messages' => $this->message]);
         }
         return $this->render('settings', ['messages' => $this->message]);
     }
 
 
+    public function friends(){
+        $friends = $this->userRepository->getUsers();
+        $this->render('friends',['friends' => $friends]);
+    }
+
+    public function search(){
+        if(isset($_SERVER["CONTENT_TYPE"])){
+            $contentType = trim($_SERVER["CONTENT_TYPE"]);
+        }else
+            $contentType =  '';
+
+        if($contentType === "application/json"){
+            $content = file_get_contents("php://input");
+            $decoded = json_decode($content,true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            echo json_encode($this->userRepository->getUserByLogin($decoded['searchLogin']));
+            die();
+        }
+
+    }
 
     private function validate(array $file): bool
     {
@@ -57,11 +84,4 @@ class ProfileController extends AppController {
         }
         return true;
     }
-
-    public function friends(){
-        $friends = $this->userRepository->getUsers();
-        $this->render('friends',['friends' => $friends]);
-    }
-
-
 }

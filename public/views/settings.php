@@ -34,20 +34,21 @@
                         </div>
 
 
-                        <form>
+                        <form action="changePassword" method="POST">
                             <label class="form-field">
                                 <span class="field-name">Old password</span>
-                                <input class="field-value" name="Old password" type="password">
+                                <input class="field-value" name="oldPassword" type="password">
                             </label>
                             <label class="form-field">
                                 <span class="field-name">New password</span>
-                                <input class="field-value" name="New password" type="password">
+                                <input class="field-value" name="password" type="password">
                             </label>
                             <label class="form-field">
                                 <span class="field-name">Repeat password</span>
-                                <input class="field-value" name="Repeat password" type="password">
+                                <input class="field-value" name="repeatPassword" type="password">
                             </label>
-                            <span class="menu-option menu-bar-button button" >save</span>
+                            <button type="submit" class="menu-option menu-bar-button button">save</button>
+<!--                            <span class="menu-option menu-bar-button button" >save</span>-->
                         </form>
                     </div>
                 </div>

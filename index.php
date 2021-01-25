@@ -12,9 +12,12 @@ Routing::get('friends','ProfileController');
 Routing::get('groups','GroupController');
 Routing::get('addGroup','GroupController');
 
+Routing::post('search','ProfileController');
+
 Routing::get('settings','ProfileController');
 Routing::post('login','SecurityController');
 Routing::post('changeAvatar','ProfileController');
+Routing::post('changePassword','SecurityController');
 
 Routing::post('changeGroupAvatar','GroupController');
 Routing::post('addGroup','GroupController');

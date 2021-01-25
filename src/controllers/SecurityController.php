@@ -49,6 +49,14 @@ Class SecurityController extends AppController {
 
     }
 
+    public function changePassword(){
+        if($this->isPost() and $_POST['password'] == $_POST['repeatPassword']){
+            $this->userRepository->changePassword(hash('sha512',$_POST['password']),hash('sha512',$_POST['oldPassword']));
+            return $this->render('settings', ['messages' => $this->message]);
+        }
+        return $this->render('settings', ['messages' => $this->message]);
+    }
+
     public function register(){
 
         if (!$this->isPost()) {

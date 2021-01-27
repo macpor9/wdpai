@@ -21,7 +21,7 @@
             </div>
             <div class="content">
                 <div class="search-bar">
-                    <input placeholder="User">
+                    <input class="input" placeholder="User">
                 </div>
 <!--                <div class="friends-content">-->
                 <div class="user-list-container">

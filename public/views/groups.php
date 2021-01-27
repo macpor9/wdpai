@@ -35,21 +35,28 @@
                 </div>
                 <div class="popup-window" id="view-group-popup<?=$number?>" >
                     <div class="inner">
+                        <form class="form" method="post" enctype="multipart/form-data" action="saveData">
                         <div>
                             <label class="label-class form-field">
                                 <span class="field-name">groupname</span>
                                 <span><?= $group->getName(); ?></span>
 
                             </label>
+                                <div class="label-class form-field" method="post" action="addMember">
+                                    <span class="field-name">add user</span>
+                                    <input name="addLogin" type="text">
+                                </div>
                         </div>
                         <div class="groups-container">
                             <img src="public/img/<?= $group->getAvatarPath(); ?>">
-
                         </div>
-                        <div>
+                        <div >
+                            <input type="hidden" value="<?=$group->getName(); ?>" name="group-name">
+                            <input type="hidden" value="<?=$group->getid(); ?>" name="group-id">
                             <input type="file" accept=".png,.jpg,.jpeg" name="file">
+                            <button class="button" type="submit">send</button>
                         </div>
-                        <button class="button" type="submit">send</button>
+                        </form>
                     </div>
                 </div>
                 <?php $number++; endforeach; ?>

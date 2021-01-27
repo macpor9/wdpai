@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Repository.php';
+require_once __DIR__.'/../../const.php';
 require_once __DIR__.'/../models/User.php';
 
 class UserRepository extends Repository{
@@ -18,7 +19,10 @@ class UserRepository extends Repository{
 
         return new User(
             $user['login'],
-            $user['password']
+            $user['password'],
+            $user['id'],
+            $user['avatar_path'],
+            $user["user_type"]
         );
     }
 
@@ -36,6 +40,7 @@ class UserRepository extends Repository{
             $result[] = new User(
                 $user['login'],
                 $user['password'],
+                $user['id'],
                 $user['avatar_path'],
             );
         }
@@ -72,28 +77,47 @@ class UserRepository extends Repository{
     }
 
     public function changeAvatar($avatarPath){
-        $id = 20;
         $stmt = $this->database->connect()->prepare("
-            UPDATE users SET avatar_path = :avatar_path WHERE (id = :id)
+            UPDATE users SET avatar_path = :avatar_path WHERE (login = :login)
         ");
         $stmt->bindParam(':avatar_path', $avatarPath, PDO::PARAM_STR);
-        $stmt->bindValue(':id',$id);
+        $stmt->bindValue(':login',$_SESSION[SESSION_KEY_USER_LOGIN]);
         $stmt->execute();
     }
 
 
 
     public function changePassword($newPassword, $oldPassword){
-        $id = 20;
         $stmt = $this->database->connect()->prepare("
-            UPDATE users SET password = :newPassword WHERE (id = :id and password = :oldPassword)
+            UPDATE users SET password = :newPassword WHERE (login = :login and password = :oldPassword)
         ");
 
-        $stmt->bindValue(':id',$id);
+        $stmt->bindValue(':login',SESSION_KEY_USER_LOGIN);
         $stmt->bindParam(':newPassword',$newPassword,PDO::PARAM_STR);
         $stmt->bindParam(':oldPassword',$oldPassword,PDO::PARAM_STR);
         $stmt->execute();
     }
+
+    public function getAvatarPathByLogin($login){
+        $stmt = $this->database->connect()->prepare("
+            SELECT avatar_path FROM users WHERE login = :login
+        ");
+
+        $stmt->bindParam(":login",$login,PDO::PARAM_STR);
+        $stmt->execute();
+
+//        return $stmt->fetchAll();
+//        return $stmt->fetch(PDO::FETCH_ASSOC);
+//        return $stmt
+
+        $path = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if($path == false)
+            return null;
+
+        return $path['avatar_path'];
+    }
+
 
     public function getUserByLogin(string $searchLogin){
         $searchLogin = '%'.strtolower($searchLogin).'%';

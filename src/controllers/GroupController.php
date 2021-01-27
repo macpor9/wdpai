@@ -29,7 +29,7 @@ class GroupController extends AppController{
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            $group = new Group($_POST['group-name'],$_FILES['file']['name']);
+            $group = new Group($_POST['group-name'],$_FILES['file']['name'],0);
             $this->groupRepository->addGroup($group);
 
 
@@ -39,7 +39,26 @@ class GroupController extends AppController{
             $url = "http://$_SERVER[HTTP_HOST]";
             header("Location: {$url}/groups");
         }
+
         return $this->render('groups', ['messages' => $this->message]);
+    }
+
+    public function changeGroupAvatar(){
+        if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
+            move_uploaded_file(
+                $_FILES['file']['tmp_name'],
+                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
+            );
+
+            $groupName = $_POST['group-name'];
+            $fileName = $_FILES['file']['name'];
+            $groupId = $_POST['group-id'];
+            $this->groupRepository->changeGroupAvatar($groupName, $fileName, $groupId);
+
+            $this->render('groups',['groups' => $groups]);
+        }
+
+        $this->render('groups',['groups' => $groups]);
     }
 
 
@@ -57,15 +76,53 @@ class GroupController extends AppController{
         return true;
     }
 
+    public function saveData(){
+        $groups = $this->groupRepository->getGroups();
+        if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
+            move_uploaded_file(
+                $_FILES['file']['tmp_name'],
+                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
+            );
 
-    public function groups(){
+            $groupName = $_POST['group-name'];
+            $fileName = $_FILES['file']['name'];
+            $groupId = $_POST['group-id'];
+            $this->groupRepository->changeGroupAvatar($groupName, $fileName, $groupId);
 
+        }
 
         $groups = $this->groupRepository->getGroups();
+        if($this->isPost() && $_POST['addLogin']){
+            $this->groupRepository->addMember($_POST['addLogin'],$_POST['group-id']);
+        }
+
+        $this->render('groups',['groups' => $groups]);
+    }
+
+    public function addMember(){
+        $groups = $this->groupRepository->getGroups();
+        if($this->isPost()){
+            $this->groupRepository->addMember($_POST['addLogin'],$_POST['group-id']);
+        }
+
+        $this->render('groups',['groups' => $groups]);
+    }
+
+
+//    public function groups(){
+//        $groups = $this->groupRepository->getGroups();
+//        $this->render('groups',['groups' => $groups]);
+//
+//    }
+    public function groups(){
+        $groups = $this->groupRepository->getUserGroups($_SESSION[SESSION_KEY_USER_ID]);
         $this->render('groups',['groups' => $groups]);
 
-
-
     }
+
+//    public function userGroups(){
+//        $groups = $this->groupRepository->getUserGroups($_SESSION[SESSION_KEY_USER_ID]);
+//        $this->render('groups',['groups' => $groups]);
+//    }
 
 }

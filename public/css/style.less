@@ -331,6 +331,7 @@ input {
 
 
     img {
+        image-rendering: pixelated;
         width: 100%;
         height: 100%;
         object-fit: fill    ;
@@ -377,7 +378,7 @@ input {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 0;
 }
-.popup-window{
+.popup-window {
     z-index: 219;
     position: fixed;
     background: rgb(0 0 0 / 59%);
@@ -388,8 +389,6 @@ input {
     align-items: center;
     justify-content: center;
     display: none;
-
-
 
     .inner {
         display: flex;
@@ -403,6 +402,12 @@ input {
         border-radius: 15px;
         text-align: center;
         justify-content: center;
+
+        .form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
 
         input {
@@ -453,6 +458,26 @@ input {
     border-radius: 1em;
     box-shadow: 0 0 0.2em red;
     outline: none;
+}
+
+.change-password-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .button{
+        width: 50%;
+    }
+}
+
+.search-bar{
+    border: 5px solid @secondary_color;
+    border-radius: 15px;
+    background: @main_background_gradient;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media only screen and (max-device-width: 420px) {

@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+require_once 'const.php';
 
 class AppController {
     private $request;
@@ -28,5 +30,22 @@ class AppController {
         }
 
         print $output;
+    }
+
+    protected function checkLogged(bool $requireLogged = true){
+        if($requireLogged){
+            if(!$_SESSION[SESSION_KEY_IS_LOGGED]){
+                $url = "http://".$_SERVER['HTTP_HOST'];
+                header("Location: {$url}");
+                die();
+            }
+        }
+        else if($_SESSION[SESSION_KEY_IS_LOGGED]){
+            $url = "http://".$_SERVER['HTTP_HOST'];
+            header("Location: {$url}/profile");
+            die();
+        }
+
+
     }
 }

@@ -1,18 +1,11 @@
 <?php
 
+require_once 'const.php';
 require_once 'AppController.php';
 require_once __DIR__."/../repository/UserRepository.php";
 
 
 class ProfileController extends AppController {
-
-    public function profile(){
-        $this->render('profile');
-    }
-
-    public function settings(){
-        $this->render('settings');
-    }
 
     private $messages = [];
     const MAX_FILE_SIZE = 1024*1024;
@@ -25,6 +18,29 @@ class ProfileController extends AppController {
         parent::__construct();
         $this->userRepository = new UserRepository();
     }
+    public function profile(){
+        $this->checkLogged();
+
+        $userLogin = $_SESSION[SESSION_KEY_USER_LOGIN];
+        $user = (new UserRepository())->getUser($userLogin);
+        $this->render('profile', [
+            'userLogin'=> $user->getLogin(),
+            'userAvatar'=>$user->getAvatarPath()
+//            'userAvatar'=>$this->userRepository->getAvatarPathByLogin($_SESSION[SESSION_KEY_USER_LOGIN])
+        ]);
+    }
+
+    public function settings(){
+        $this->checkLogged();
+//        $this->render('settings');
+        $userLogin = $_SESSION[SESSION_KEY_USER_LOGIN];
+        $user = (new UserRepository())->getUser($userLogin);
+        $this->render('settings', [
+            'userLogin'=> $user->getLogin(),
+            'userAvatar'=>$user->getAvatarPath()
+        ]);
+    }
+
 
 
     public function changeAvatar()
@@ -37,17 +53,19 @@ class ProfileController extends AppController {
             $this->userRepository->changeAvatar($_FILES['file']['name']);
 
 
-
-
-
-
-            return $this->render('settings', ['messages' => $this->message]);
+//            return $this->render('settings', ['messages' => $this->message]);
         }
-        return $this->render('settings', ['messages' => $this->message]);
+//        return $this->render('settings', ['messages' => $this->message]);
+        $this->settings();
+
     }
 
 
     public function friends(){
+        $this->checkLogged();
+        if($_SESSION[SESSION_KEY_USER_TYPE] != 2)
+            return $this->render('profile');
+
         $friends = $this->userRepository->getUsers();
         $this->render('friends',['friends' => $friends]);
     }

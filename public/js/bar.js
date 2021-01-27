@@ -1,10 +1,5 @@
 
 
-document.addEventListener("keydown", (e)=>{
-    if(e.code === "Escape"){
-        hideSettingsPopup(e);
-    }
-});
 
 function onClickMenuBarIcon(){
     let e = document.getElementById("mainNav");
@@ -23,6 +18,13 @@ function onClickProfileButton(){
 
 
 
+document.addEventListener("keydown", (e)=>{
+    if(e.code === "Escape"){
+        hidePopup(e);
+    }
+});
+
+
 window.addEventListener("load", ()=>{
    popupInit();
 });
@@ -34,18 +36,6 @@ function popupInit(){
         i.children[0].addEventListener("click", (e) => e.stopPropagation());
     }
 }
-
-// function showSettingsPopup(){
-//     let e = document.getElementById("popup");
-//     e.classList.add("show");
-// }
-// function hideSettingsPopup(event) {
-//     if (event)
-//         event.stopPropagation();
-//
-//     let e = document.getElementById("popup");
-//     e.classList.remove("show");
-// }
 
 
 

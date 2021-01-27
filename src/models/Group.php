@@ -4,19 +4,24 @@
 class Group{
     private $name;
     private $avatar_path;
+    private $id;
 
 
 
-
-    public function __construct(string $name, string $avatar_path)
+    public function __construct(string $name, string $avatar_path, $id)
     {
         $this->name = $name;
         $this->avatar_path = $avatar_path;
+        $this->id = $id;
     }
 
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getId(){
+        return $this->id;
     }
 
     public function setName(string $name): void

@@ -17,24 +17,16 @@
                     Settings
                 </span>
             </div>
-
             <div class="content">
                 <div class="form-container profile-container">
                     <div class="profile-form avatar-form">
                         <div class="avatar">
-                            <img src="public/img/avatar.svg">
+                            <img src="public/img/<?=$userAvatar?>">
                             <div class="change-avatar" action="changeAvatar" method="POST" ENCTYPE="multipart/form-data">
-
-
-<!--                                <input name="Change Avatar" type="file">-->
                                 <button  class="button-image" onclick="showPopup('change-avatar-popup')">change avatar</button>
                             </div>
-
-
                         </div>
-
-
-                        <form action="changePassword" method="POST">
+                        <form class="change-password-form" action="changePassword" method="POST">
                             <label class="form-field">
                                 <span class="field-name">Old password</span>
                                 <input class="field-value" name="oldPassword" type="password">
@@ -48,7 +40,6 @@
                                 <input class="field-value" name="repeatPassword" type="password">
                             </label>
                             <button type="submit" class="menu-option menu-bar-button button">save</button>
-<!--                            <span class="menu-option menu-bar-button button" >save</span>-->
                         </form>
                     </div>
                 </div>

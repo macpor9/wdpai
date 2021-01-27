@@ -18,7 +18,8 @@ class GroupRepository extends Repository{
 
         return new Group(
             $group['name'],
-            $group['avatar_path']
+            $group['avatar_path'],
+            $group['id']
         );
     }
 
@@ -28,12 +29,25 @@ class GroupRepository extends Repository{
             VALUES (?,?,?)
         ');
 
-        $id_assigned_by = 11;
+        $id_assigned_by = $_SESSION[SESSION_KEY_USER_ID];
         $stmt->execute([
             $group->getName(),
             $group->getAvatarPath(),
             $id_assigned_by
         ]);
+    }
+
+    public function changeGroupAvatar($groupName,$fileName,$groupId){
+        $stmt = $this->database->connect()->prepare('
+            UPDATE groups SET avatar_path=:filename WHERE name=:groupName and id=:groupId
+        ');
+
+        $stmt->bindParam(':filename',$fileName,PDO::PARAM_STR);
+        $stmt->bindParam(':groupName',$groupName,PDO::PARAM_STR);
+        $stmt->bindValue(':groupId',$groupId);
+//        $stmt->bindParam(':groupId',$groupId,PDO::PARAM_INT);
+        $stmt->execute();
+
     }
 
     public function getGroups(): array
@@ -49,11 +63,52 @@ class GroupRepository extends Repository{
         foreach ($groups as $group) {
             $result[] = new Group(
                 $group['name'],
-                $group['avatar_path']
+                $group['avatar_path'],
+                $group['id']
             );
         }
 
         return $result;
+    }
+
+    public function getUserGroups($idUser): array{
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM groups g 
+                INNER JOIN user_groups ug on g.id=ug.id_group 
+                INNER JOIN users u on :idUser=u.id
+
+        ');
+
+        $stmt->bindValue(':idUser',$idUser);
+
+        $stmt->execute();
+        $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        print_r($groups);
+        foreach ($groups as $group){
+            $result[] = new Group(
+                $group['name'],
+                $group['avatar_path'],
+                $group['id_group']
+            );
+        }
+
+        return $result;
+    }
+
+    public function addMember($addLogin,$groupId){
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO user_groups(id_user, id_group)
+            VALUES (
+                (SELECT id FROM users WHERE users.login=:addLogin),
+                :groupId
+            );
+        ');
+
+        $stmt->bindValue(':addLogin',$addLogin);
+        $stmt->bindValue(':groupId',$groupId);
+        $stmt->execute();
     }
 
 }

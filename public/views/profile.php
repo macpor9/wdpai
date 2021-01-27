@@ -22,11 +22,11 @@
                 <div class="form-container profile-container">
                     <div class="profile">
                         <div class="avatar">
-                            <img src="public/img/avatar.svg">
+                            <img src="public/img/<?=$userAvatar?>">
                         </div>
                         <label class="label-class form-field">
                             <span class="field-name">Nick</span>
-                            <span>Jacek</span>
+                            <span><?=$userLogin ?></span>
                         </label>
                         <label class="label-class form-field">
                             <span class="field-name">Opis</span>

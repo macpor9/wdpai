@@ -3,6 +3,7 @@
     <?php
     require __DIR__."/../includes/head.php";
     ?>
+    <script src = "public/js/passwordValidation.js" defer></script>
     <title>register</title>
 </head>
 <body>  
@@ -29,7 +30,7 @@
                     <span class="field-name-form">password</span>
                     <input name="password" type="text">
                 </label>
-                <label class="form-field">
+                <label class="form-field" id="rPassword">
                     <span class="field-name-form">repeat password</span>
                     <input name="repeat-password" type="text">
                 </label> 

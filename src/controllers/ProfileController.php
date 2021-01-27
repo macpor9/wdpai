@@ -1,6 +1,5 @@
 <?php
 
-require_once 'const.php';
 require_once 'AppController.php';
 require_once __DIR__."/../repository/UserRepository.php";
 
@@ -10,7 +9,7 @@ class ProfileController extends AppController {
     private $messages = [];
     const MAX_FILE_SIZE = 1024*1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpg', 'image/jpeg'];
-    const UPLOAD_DIRECTORY = '/../public/uploads/';
+    const UPLOAD_DIRECTORY = '/../public/img/';
 
     private $userRepository;
 
@@ -26,13 +25,11 @@ class ProfileController extends AppController {
         $this->render('profile', [
             'userLogin'=> $user->getLogin(),
             'userAvatar'=>$user->getAvatarPath()
-//            'userAvatar'=>$this->userRepository->getAvatarPathByLogin($_SESSION[SESSION_KEY_USER_LOGIN])
         ]);
     }
 
     public function settings(){
         $this->checkLogged();
-//        $this->render('settings');
         $userLogin = $_SESSION[SESSION_KEY_USER_LOGIN];
         $user = (new UserRepository())->getUser($userLogin);
         $this->render('settings', [
@@ -52,10 +49,7 @@ class ProfileController extends AppController {
             );
             $this->userRepository->changeAvatar($_FILES['file']['name']);
 
-
-//            return $this->render('settings', ['messages' => $this->message]);
         }
-//        return $this->render('settings', ['messages' => $this->message]);
         $this->settings();
 
     }
@@ -63,8 +57,10 @@ class ProfileController extends AppController {
 
     public function friends(){
         $this->checkLogged();
-        if($_SESSION[SESSION_KEY_USER_TYPE] != 2)
-            return $this->render('profile');
+        if($_SESSION[SESSION_KEY_USER_TYPE] != 2){
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/profile");
+        }
 
         $friends = $this->userRepository->getUsers();
         $this->render('friends',['friends' => $friends]);

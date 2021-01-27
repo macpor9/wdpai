@@ -61,7 +61,6 @@ class GroupRepository extends Repository{
         $stmt->bindParam(':filename',$fileName,PDO::PARAM_STR);
         $stmt->bindParam(':groupName',$groupName,PDO::PARAM_STR);
         $stmt->bindValue(':groupId',$groupId);
-//        $stmt->bindParam(':groupId',$groupId,PDO::PARAM_INT);
         $stmt->execute();
 
     }

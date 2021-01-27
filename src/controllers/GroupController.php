@@ -33,16 +33,12 @@ class GroupController extends AppController{
             $this->groupRepository->addGroup($group);
 
 
-
-//            return $this->render('groups', ['messages' => $this->message]);
-
             $url = "http://$_SERVER[HTTP_HOST]";
             header("Location: {$url}/groups");
         }
 
-//        $this->groupRepository->addMember($_SESSION[SESSION_KEY_USER_LOGIN],$_POST['group-id']);
 
-        return $this->render('groups', ['messages' => $this->message]);
+        $this->render('groups', ['messages' => $this->message]);
     }
 
     public function changeGroupAvatar(){
@@ -104,7 +100,6 @@ class GroupController extends AppController{
             $this->groupRepository->setBalance($_POST['balance'],$_POST['group-id']);
         }
 
-//        $this->render('groups',['groups' => $groups]);
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/groups");
     }
@@ -114,25 +109,15 @@ class GroupController extends AppController{
         if($this->isPost()){
             $this->groupRepository->addMember($_POST['addLogin'],$_POST['group-id']);
         }
-
         $this->render('groups',['groups' => $groups]);
     }
 
 
-//    public function groups(){
-//        $groups = $this->groupRepository->getGroups();
-//        $this->render('groups',['groups' => $groups]);
-//
-//    }
     public function groups(){
         $groups = $this->groupRepository->getUserGroups($_SESSION[SESSION_KEY_USER_ID]);
         $this->render('groups',['groups' => $groups]);
 
     }
 
-//    public function userGroups(){
-//        $groups = $this->groupRepository->getUserGroups($_SESSION[SESSION_KEY_USER_ID]);
-//        $this->render('groups',['groups' => $groups]);
-//    }
 
 }

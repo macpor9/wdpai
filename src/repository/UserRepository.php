@@ -105,11 +105,6 @@ class UserRepository extends Repository{
 
         $stmt->bindParam(":login",$login,PDO::PARAM_STR);
         $stmt->execute();
-
-//        return $stmt->fetchAll();
-//        return $stmt->fetch(PDO::FETCH_ASSOC);
-//        return $stmt
-
         $path = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if($path == false)

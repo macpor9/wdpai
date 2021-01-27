@@ -1,6 +1,5 @@
 <?php
 
-require_once "const.php";
 require_once "AppController.php";
 require_once __DIR__."/../models/User.php";
 require_once __DIR__."/../repository/UserRepository.php";
@@ -32,14 +31,12 @@ Class SecurityController extends AppController {
             $this->render('login', ["messages" => ["User does not exist"]]);
 
         if($user->getLogin() !== $login){
-            return $this->render('login', ["messages" => ["User with this login does not exist"]]);
+            $this->render('login', ["messages" => ["User with this login does not exist"]]);
         }
 
         if($user->getPassword() !== hash("sha512",$password)){
-//        if($userRepository->getPasswordByLogin($login) !== $password){
-            return $this->render('login', ["messages" => ["Wrong password!"]]);
+            $this->render('login', ["messages" => ["Wrong password!"]]);
         }
-//        return $this->render('profile');
 
 
         $_SESSION[SESSION_KEY_IS_LOGGED] = true;
@@ -54,16 +51,16 @@ Class SecurityController extends AppController {
     public function changePassword(){
         if($this->isPost() and $_POST['password'] == $_POST['repeatPassword']){
             $this->userRepository->changePassword(hash('sha512',$_POST['password']),hash('sha512',$_POST['oldPassword']));
-            return $this->render('settings', ['messages' => $this->message]);
+            $this->render('settings', ['messages' => $this->message]);
         }
-        return $this->render('settings', ['messages' => $this->message]);
+        $this->render('settings', ['messages' => $this->message]);
     }
 
     public function register(){
         $this->checkLogged(false);
 
         if (!$this->isPost()) {
-            return $this->render('register');
+            $this->render('register');
         }
 
         $login = $_POST['login'];
@@ -76,7 +73,7 @@ Class SecurityController extends AppController {
         $user = new User($login,hash("sha512",$password), $_SESSION[SESSION_KEY_USER_ID]);
         $this->userRepository->register($user);
 
-        return $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
+        $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
 
 
     }
@@ -94,7 +91,7 @@ Class SecurityController extends AppController {
 
     public function removeUser(){
         if(!$this->isPost()){
-            return $this->render('friends');
+            $this->render('friends');
         }
 
         $login = $_POST['login'];

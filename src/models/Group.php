@@ -38,7 +38,7 @@ class Group{
     }
 
     public function getUserBalance(){
-        return $this->balance/(100*$this->userCount);
+        return round($this->balance/(100*$this->userCount),2);
     }
 
     public function getAvatarPath(): string

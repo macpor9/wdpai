@@ -4,7 +4,7 @@ const userContainer = document.querySelector(".user-list-container");
 
 
 searchLogin.addEventListener("keyup", function(event){
-   if(event.key === "Enter"){
+   // if(event.key === "Enter"){
        event.preventDefault();
 
        const data = {searchLogin: this.value};
@@ -19,7 +19,7 @@ searchLogin.addEventListener("keyup", function(event){
            userContainer.innerHTML = "";
            loadUsers(users)
        });
-   }
+   // }
 });
 
 function loadUsers(users) {

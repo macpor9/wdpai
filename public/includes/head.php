@@ -3,4 +3,3 @@
 <link rel="stylesheet" type="text/css" href="public/css/style.css">
 <link rel="stylesheet" type="text/css" href="public/css/fa-icons.min.css">
 <script src = "public/js/bar.js"></script>
-<script src = "public/js/searchUsers.js" defer></script>

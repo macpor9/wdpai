@@ -28,14 +28,6 @@
                             <span class="field-name">Nick</span>
                             <span><?=$userLogin ?></span>
                         </label>
-                        <label class="label-class form-field">
-                            <span class="field-name">Opis</span>
-                            <span>opis</span>
-                        </label>
-                        <label class="label-class form-field">
-                            <span class="field-name">Grupa</span>
-                            <span>Dom 1; Dom 2</span>
-                        </label>
                     </div>
                 </div>
             </div>

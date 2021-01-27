@@ -3,7 +3,7 @@
     <?php
     require __DIR__."/../includes/head.php";
     ?>
-<!--    <script type="text/javascript" src ="public/js/searchUsers.js"></script>-->
+    <script src = "public/js/searchUsers.js" defer></script>
     <title>friends</title>
 </head>
 <body>  

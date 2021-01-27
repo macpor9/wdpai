@@ -9,6 +9,7 @@ $path = parse_url($path, PHP_URL_PATH);
 session_start();
 
 Routing::get('','DefaultController');
+//Routing::get('registerUser','SecurityController');
 Routing::get('register','SecurityController');
 Routing::get('profile','ProfileController');
 Routing::get('friends','ProfileController');

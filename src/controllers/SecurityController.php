@@ -63,18 +63,19 @@ Class SecurityController extends AppController {
             $this->render('register');
         }
 
-        $login = $_POST['login'];
-        $password = $_POST['password'];
-        $repeatPassword = $_POST['repeat-password'];
+        if($_POST['login'] && $_POST['password'] && $_POST['repeat-password']) {
+            $login = $_POST['login'];
+            $password = $_POST['password'];
+            $repeatPassword = $_POST['repeat-password'];
 
-        if($password != $repeatPassword)
-            $this->render('register', ["messages" => ["Passwords are different!"]]);
+            if ($password != $repeatPassword)
+                $this->render('register', ["messages" => ["Passwords are different!"]]);
 
-        $user = new User($login,hash("sha512",$password), $_SESSION[SESSION_KEY_USER_ID]);
-        $this->userRepository->register($user);
+            $user = new User($login, hash("sha512", $password), $_SESSION[SESSION_KEY_USER_ID]);
+            $this->userRepository->register($user);
 
-        $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
-
+            $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
+        }
 
     }
 

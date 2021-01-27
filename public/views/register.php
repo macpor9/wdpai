@@ -33,17 +33,11 @@
                 <label class="form-field" id="rPassword">
                     <span class="field-name-form">repeat password</span>
                     <input name="repeat-password" type="text">
-                </label> 
-
-
-                
-               
-                
+                </label>
                 
                 <div class="button-container">
                     <button class="menu-option menu-bar-button button" type="submit" ">Sign up</button>
                 </div>
-                    
             </form>
         </div>
     </div>

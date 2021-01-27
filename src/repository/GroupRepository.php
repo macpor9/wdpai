@@ -18,14 +18,16 @@ class GroupRepository extends Repository{
 
         return new Group(
             $group['name'],
-            $group['avatar_path'],
-            $group['id']
+            $group['group_avatar_path'],
+            $group['id'],
+            $group['balance'],
+            $group['userCount']
         );
     }
 
     public function addGroup(Group $group):void {
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO groups (name,avatar_path,id_assigned_by)
+            INSERT INTO groups (name,group_avatar_path,id_assigned_by)
             VALUES (?,?,?)
         ');
 
@@ -35,11 +37,25 @@ class GroupRepository extends Repository{
             $group->getAvatarPath(),
             $id_assigned_by
         ]);
+
+
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO user_groups(id_group, id_user)
+            VALUES (
+                (SELECT MAX(id) FROM groups),
+                :idAssignedBy
+            );
+        ');
+
+        $stmt->bindValue(":idAssignedBy", $_SESSION[SESSION_KEY_USER_ID]);
+        $stmt->execute();
+
     }
 
     public function changeGroupAvatar($groupName,$fileName,$groupId){
         $stmt = $this->database->connect()->prepare('
-            UPDATE groups SET avatar_path=:filename WHERE name=:groupName and id=:groupId
+            UPDATE groups SET group_avatar_path=:filename WHERE name=:groupName and id=:groupId
         ');
 
         $stmt->bindParam(':filename',$fileName,PDO::PARAM_STR);
@@ -63,8 +79,10 @@ class GroupRepository extends Repository{
         foreach ($groups as $group) {
             $result[] = new Group(
                 $group['name'],
-                $group['avatar_path'],
-                $group['id']
+                $group['group_avatar_path'],
+                $group['id'],
+                $group['balance'],
+                $group['userCount']
             );
         }
 
@@ -76,8 +94,7 @@ class GroupRepository extends Repository{
 
         $stmt = $this->database->connect()->prepare('
             SELECT * FROM groups g 
-                INNER JOIN user_groups ug on g.id=ug.id_group 
-                INNER JOIN users u on :idUser=u.id
+                INNER JOIN user_groups ug on g.id=ug.id_group WHERE :idUser = ug.id_user
 
         ');
 
@@ -85,12 +102,13 @@ class GroupRepository extends Repository{
 
         $stmt->execute();
         $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        print_r($groups);
         foreach ($groups as $group){
             $result[] = new Group(
                 $group['name'],
-                $group['avatar_path'],
-                $group['id_group']
+                $group['group_avatar_path'],
+                $group['id'],
+                $group['balance'],
+                $group['userCount']
             );
         }
 
@@ -104,10 +122,38 @@ class GroupRepository extends Repository{
                 (SELECT id FROM users WHERE users.login=:addLogin),
                 :groupId
             );
+            
         ');
 
         $stmt->bindValue(':addLogin',$addLogin);
         $stmt->bindValue(':groupId',$groupId);
+        $stmt->execute();
+
+
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM user_groups T1
+            USING   user_groups T2
+            WHERE   T1.ctid < T2.ctid
+            AND T1.id_group  = T2.id_group
+            AND T1.id_user = T2.id_user
+        ');
+        $stmt->execute();
+
+        $stmt = $this->database->connect()->prepare('
+            UPDATE groups SET "userCount"= (SELECT COUNT(id_group) FROM user_groups WHERE id_group= :groupId)
+        ');
+        $stmt->bindValue(':groupId',$groupId);
+        $stmt->execute();
+
+    }
+
+    public function setBalance($balance, $groupId){
+        $stmt = $this->database->connect()->prepare('
+            UPDATE groups SET balance=:balance WHERE id=:groupId
+        ');
+
+        $stmt->bindParam(':balance',$balance);
+        $stmt->bindParam(':groupId',$groupId);
         $stmt->execute();
     }
 

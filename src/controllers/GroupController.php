@@ -29,7 +29,7 @@ class GroupController extends AppController{
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            $group = new Group($_POST['group-name'],$_FILES['file']['name'],0);
+            $group = new Group($_POST['group-name'],$_FILES['file']['name'],$_POST['group-id'],0,0);
             $this->groupRepository->addGroup($group);
 
 
@@ -40,10 +40,13 @@ class GroupController extends AppController{
             header("Location: {$url}/groups");
         }
 
+//        $this->groupRepository->addMember($_SESSION[SESSION_KEY_USER_LOGIN],$_POST['group-id']);
+
         return $this->render('groups', ['messages' => $this->message]);
     }
 
     public function changeGroupAvatar(){
+
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file(
                 $_FILES['file']['tmp_name'],
@@ -54,6 +57,7 @@ class GroupController extends AppController{
             $fileName = $_FILES['file']['name'];
             $groupId = $_POST['group-id'];
             $this->groupRepository->changeGroupAvatar($groupName, $fileName, $groupId);
+            $groups = $this->groupRepository->getGroups();
 
             $this->render('groups',['groups' => $groups]);
         }
@@ -91,16 +95,22 @@ class GroupController extends AppController{
 
         }
 
-        $groups = $this->groupRepository->getGroups();
+        $groups = $this->groupRepository->getUserGroups($_SESSION[SESSION_KEY_USER_ID]);
         if($this->isPost() && $_POST['addLogin']){
             $this->groupRepository->addMember($_POST['addLogin'],$_POST['group-id']);
         }
 
-        $this->render('groups',['groups' => $groups]);
+        if($this->isPost() && $_POST['balance']){
+            $this->groupRepository->setBalance($_POST['balance'],$_POST['group-id']);
+        }
+
+//        $this->render('groups',['groups' => $groups]);
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/groups");
     }
 
     public function addMember(){
-        $groups = $this->groupRepository->getGroups();
+        $groups = $this->groupRepository->getUserGroups($_SESSION[SESSION_KEY_USER_ID]);
         if($this->isPost()){
             $this->groupRepository->addMember($_POST['addLogin'],$_POST['group-id']);
         }

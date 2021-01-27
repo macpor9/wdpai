@@ -32,6 +32,14 @@
                 <div class="groups-container">
                     <img src="public/img/<?= $group->getAvatarPath(); ?>">
                     <button class = "button-image" onclick=showPopup("view-group-popup<?=$number?>")><?= $group->getName(); ?></button>
+                    <label class="label-class form-field">
+                        <span class="field-name">group balance</span>
+                        <span><?= $group->getBalance(); ?></span>
+                    </label>
+                    <label class="label-class form-field">
+                        <span class="field-name">your balance</span>
+                        <span><?= $group->getUserBalance(); ?></span>
+                    </label>
                 </div>
                 <div class="popup-window" id="view-group-popup<?=$number?>" >
                     <div class="inner">
@@ -40,19 +48,22 @@
                             <label class="label-class form-field">
                                 <span class="field-name">groupname</span>
                                 <span><?= $group->getName(); ?></span>
-
                             </label>
-                                <div class="label-class form-field" method="post" action="addMember">
-                                    <span class="field-name">add user</span>
-                                    <input name="addLogin" type="text">
-                                </div>
+                            <div class="label-class form-field" method="post" action="addMember">
+                                <span class="field-name">add user</span>
+                                <input name="addLogin" type="text" placeholder="name">
+                            </div>
+                            <div class="label-class form-field" method="post" action="addMember">
+                                <span class="field-name">set balance</span>
+                                <input name="balance" type="number" placeholder="0gr">
+                            </div>
                         </div>
                         <div class="groups-container">
                             <img src="public/img/<?= $group->getAvatarPath(); ?>">
                         </div>
                         <div >
                             <input type="hidden" value="<?=$group->getName(); ?>" name="group-name">
-                            <input type="hidden" value="<?=$group->getid(); ?>" name="group-id">
+                            <input type="hidden" value="<?=$group->getId(); ?>" name="group-id">
                             <input type="file" accept=".png,.jpg,.jpeg" name="file">
                             <button class="button" type="submit">send</button>
                         </div>

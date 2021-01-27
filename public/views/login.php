@@ -30,10 +30,8 @@
                 </label>
     
                 <div class="button-container">
-                    <input class="menu-option menu-bar-button button" type="submit" value="Login">
-                    <form action="registerHref" method="GET">
-                        <input class="menu-option menu-bar-button button" type="submit" value="Sign up">
-                    </form>
+                    <button class="menu-option menu-bar-button button" type="submit" >Login</button>
+                    <button class="menu-option menu-bar-button button" type="button" onclick="window.location='/register'">Sign Up</button>
                 </div>
                     
             </form>

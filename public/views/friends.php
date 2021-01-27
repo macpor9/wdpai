@@ -16,7 +16,7 @@
             <div class="header">
                 <i class="fas fa-user-friends menu-image"></i>
                 <span class="header-text">
-                    Friends
+                    Users
                 </span>
             </div>
             <div class="content">

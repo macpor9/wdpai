@@ -631,6 +631,34 @@ img{
         }
 }
 
+    .user-list-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: start;
+
+        .user-container{
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 3em;
+            margin-top: 3em;
+
+            .img-container{
+                .img{
+                    width: 7em;
+                    height: 7em;
+                    object-fit: fill;
+                }
+            }
+
+            .user-data-container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+
 .input-form {
     width: auto;
     margin: 0;

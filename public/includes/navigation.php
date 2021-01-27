@@ -14,7 +14,7 @@
 
         <?php if($_SESSION[SESSION_KEY_USER_TYPE] == 2) : ?>
         <i class="fas fa-user-friends menu-image"></i>
-        <a class="menu-option menu-bar-button button" href="/friends">Friends</a>
+        <a class="menu-option menu-bar-button button" href="/friends">Users(admin)</a>
         <?php endif; ?>
 
         <i class="fas fa-cog menu-image"></i>

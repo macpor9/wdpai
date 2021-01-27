@@ -116,17 +116,13 @@ class GroupRepository extends Repository{
 
     public function addMember($addLogin,$groupId){
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO user_groups(id_user, id_group)
-            VALUES (
-                (SELECT id FROM users WHERE users.login=:addLogin),
-                :groupId
-            );
-            
+            CALL addMember(:addLogin, :groupId)
         ');
 
         $stmt->bindValue(':addLogin',$addLogin);
         $stmt->bindValue(':groupId',$groupId);
         $stmt->execute();
+
 
 
         $stmt = $this->database->connect()->prepare('

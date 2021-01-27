@@ -12,13 +12,10 @@
     ?>
     <div class="right-panel">
         <div class="header">
-            <div>
-
             <i class="fas fa-layer-group menu-image"></i>
             <span class="header-text">
                 Groups
             </span>
-            </div>
         </div>
         <div class="content">
             <div>

@@ -492,12 +492,14 @@ img{
 }
 
 @media only screen and (max-device-width: 420px) {
+
+
     .container {
         background: @main_background_gradient;
         flex-direction: column;
 
         .logo {
-            width: 70%;
+            width: 100%;
         }
     }
 
@@ -507,6 +509,14 @@ img{
 
     *{
         font-size: 30px;
+    }
+
+    .button-container {
+        width: 90%;
+    }
+
+    .right-panel{
+        margin: 0;
     }
 
     form{
@@ -530,6 +540,30 @@ img{
 
         .header-text{
             font-size: 0.8em;
+        }
+    }
+
+    .popup-window{
+        .inner{
+            position: fixed;
+            transform: none;
+            top:1em;
+            right: 1em;
+            bottom: 4em;
+            left: 1em;
+            width: auto;
+            height: auto;
+
+            form{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                input[type=file]{
+                    width: 47%;
+                }
+            }
         }
     }
 
@@ -608,6 +642,7 @@ img{
 
     .content{
         margin-top: 3em;
+
 
         .label-class {
             display: flex;
